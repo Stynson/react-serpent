@@ -146,6 +146,8 @@ const SvgArrow = ({
     endingAnchorOrientation,
     strokeColor,
     arrowLength,
+    onMouseEnter,
+    onMouseLeave,
     transparentStrokeWidth,
     strokeWidth,
     strokeDasharray,
@@ -184,7 +186,7 @@ const SvgArrow = ({
     const { xLabel, yLabel, labelWidth, labelHeight } = computeLabelDimensions(xStart, yStart, xEnd, yEnd);
 
     return (
-        <g className="serpent">
+        <g className="serpent" onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
             <path
                 d={pathString}
                 style={{

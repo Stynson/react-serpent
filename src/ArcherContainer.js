@@ -226,6 +226,8 @@ export class ArcherContainer extends React.Component<Props, State> {
                     endingAnchorOrientation={endingAnchorOrientation}
                     strokeColor={strokeColor}
                     arrowLength={arrowLength}
+                    onMouseEnter={e => this.props.onMouseEnter(e, source.id, target.id)}
+                    onMouseLeave={e => this.props.onMouseLeave(e, source.id, target.id)}
                     transparentStrokeWidth={transparentStrokeWidth}
                     strokeWidth={strokeWidth}
                     strokeDasharray={strokeDasharray}

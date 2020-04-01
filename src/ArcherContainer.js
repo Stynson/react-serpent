@@ -90,6 +90,7 @@ export class ArcherContainer extends React.Component<Props, State> {
         arrowThickness: 0,
         strokeColor: "#f00",
         strokeWidth: 2,
+        transparentStrokeWidth: 2,
         svgContainerStyle: {},
     };
 
@@ -199,6 +200,8 @@ export class ArcherContainer extends React.Component<Props, State> {
 
             const strokeWidth = (style && style.strokeWidth) || this.props.strokeWidth;
 
+            const transparentStrokeWidth = (style && style.transparentStrokeWidth) || this.props.transparentStrokeWidth;
+
             const strokeDasharray = (style && style.strokeDasharray) || this.props.strokeDasharray;
 
             const arrowThickness = (style && style.arrowThickness) || this.props.arrowThickness;
@@ -223,6 +226,7 @@ export class ArcherContainer extends React.Component<Props, State> {
                     endingAnchorOrientation={endingAnchorOrientation}
                     strokeColor={strokeColor}
                     arrowLength={arrowLength}
+                    transparentStrokeWidth={transparentStrokeWidth}
                     strokeWidth={strokeWidth}
                     strokeDasharray={strokeDasharray}
                     arrowLabel={label}

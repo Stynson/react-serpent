@@ -1,20 +1,4 @@
 import React from "react";
-import Point from "./Point";
-
-type Props = {
-    startingPoint: Point,
-    startingAnchorOrientation: AnchorPositionType,
-    endingPoint: Point,
-    endingAnchorOrientation: AnchorPositionType,
-    strokeColor: string,
-    arrowLength: number,
-    strokeWidth: number,
-    strokeDasharray?: string,
-    arrowLabel?: ?React$Node,
-    arrowMarkerId: string,
-    noCurves: boolean,
-    offset?: number,
-};
 
 function computeEndingArrowDirectionVector(endingAnchorOrientation) {
     switch (endingAnchorOrientation) {
@@ -162,13 +146,14 @@ const SvgArrow = ({
     endingAnchorOrientation,
     strokeColor,
     arrowLength,
+    transparentStrokeWidth,
     strokeWidth,
     strokeDasharray,
     arrowLabel,
     arrowMarkerId,
     noCurves,
     offset,
-}: Props) => {
+}) => {
     const actualArrowLength = arrowLength * 2;
 
     const xStart = startingPoint.x;
@@ -205,7 +190,7 @@ const SvgArrow = ({
                 style={{
                     fill: "none",
                     stroke: "transparent",
-                    strokeWidth: strokeWidth + 2,
+                    strokeWidth: transparentStrokeWidth,
                     strokeDasharray,
                 }}
                 className="arrow"

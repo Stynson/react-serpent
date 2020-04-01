@@ -252,7 +252,7 @@ export class ArcherContainer extends React.Component<Props, State> {
                 }}
             >
                 <div style={{ ...this.props.style, position: "relative" }} className={this.props.className}>
-                    <svg style={this.svgContainerStyle()}>
+                    <svg className="serpent-container" style={this.svgContainerStyle()}>
                         <filter id="glow">
                             <feGaussianBlur class="blur" result="coloredBlur" stdDeviation="4"></feGaussianBlur>
                             <feMerge>

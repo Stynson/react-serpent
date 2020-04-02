@@ -196,7 +196,6 @@ const SvgArrow = ({
                     strokeDasharray,
                 }}
                 className="arrow"
-                markerEnd={`url(${location.href.split("#")[0]}#${arrowMarkerId})`}
             />
             <path
                 d={pathString}
@@ -207,7 +206,8 @@ const SvgArrow = ({
                     strokeDasharray,
                 }}
                 className="arrow"
-                markerEnd={`url(${location.href.split("#")[0]}#${arrowMarkerId})`}
+                markerEnd={`url(#circle)`}
+                markerStart={`url(#circle)`}
             />
             {arrowLabel && (
                 <foreignObject x={xLabel} y={yLabel} width={labelWidth} height={labelHeight} style={{ overflow: "visible", pointerEvents: "none" }}>

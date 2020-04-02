@@ -214,8 +214,12 @@ export class ArcherContainer extends React.Component<Props, State> {
             const startingPoint = this.getPointCoordinatesFromAnchorPosition(source.anchor, source.id, parentCoordinates);
 
             const endingAnchorOrientation = target.anchor;
-            console.log(source, target, parentCoordinates);
             const endingPoint = this.getPointCoordinatesFromAnchorPosition(target.anchor, target.id, parentCoordinates);
+
+            let onMouseEnter = () => {};
+            if (this.props.onMouseEnter) onMouseEnter = e => this.props.onMouseEnter(e, source.id, target.id);
+            let onMouseLeave = () => {};
+            if (this.props.onMouseLeave) onMouseLeave = e => this.props.onMouseLeave(e, source.id, target.id);
 
             return (
                 <SvgArrow
@@ -226,8 +230,8 @@ export class ArcherContainer extends React.Component<Props, State> {
                     endingAnchorOrientation={endingAnchorOrientation}
                     strokeColor={strokeColor}
                     arrowLength={arrowLength}
-                    onMouseEnter={e => this.props.onMouseEnter(e, source.id, target.id)}
-                    onMouseLeave={e => this.props.onMouseLeave(e, source.id, target.id)}
+                    onMouseEnter={onMouseEnter}
+                    onMouseLeave={onMouseLeave}
                     transparentStrokeWidth={transparentStrokeWidth}
                     strokeWidth={strokeWidth}
                     strokeDasharray={strokeDasharray}
@@ -259,6 +263,9 @@ export class ArcherContainer extends React.Component<Props, State> {
             >
                 <div style={{ ...this.props.style, position: "relative" }} className={this.props.className}>
                     <svg className="serpent-container" style={this.svgContainerStyle()}>
+                        <marker id="circle" markerWidth="7" markerHeight="7" refX="0.5" refY="0.5" orient="auto">
+                            <circle cx="0.5" cy="0.5" r="0.5" fill="white"></circle>
+                        </marker>
                         <filter id="glow">
                             <feGaussianBlur class="blur" result="coloredBlur" stdDeviation="4"></feGaussianBlur>
                             <feMerge>

@@ -1,6 +1,6 @@
 {
     "name": "react-serpent",
-    "version": "1.0.9",
+    "version": "1.0.10",
     "description": "React library for making curves between DOM elements",
     "author": "Stynson",
     "license": "MIT",

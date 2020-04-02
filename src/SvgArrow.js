@@ -206,8 +206,6 @@ const SvgArrow = ({
                     strokeDasharray,
                 }}
                 className="arrow"
-                markerEnd={`url(#circle)`}
-                markerStart={`url(#circle)`}
             />
             {arrowLabel && (
                 <foreignObject x={xLabel} y={yLabel} width={labelWidth} height={labelHeight} style={{ overflow: "visible", pointerEvents: "none" }}>

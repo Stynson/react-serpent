@@ -263,8 +263,8 @@ export class ArcherContainer extends React.Component<Props, State> {
             >
                 <div style={{ ...this.props.style, position: "relative" }} className={this.props.className}>
                     <svg className="serpent-container" style={this.svgContainerStyle()}>
-                        <marker id="circle" markerWidth="7" markerHeight="7" refX="0.5" refY="0.5" orient="auto">
-                            <circle cx="0.5" cy="0.5" r="0.5" fill="white"></circle>
+                        <marker id="circle" markerWidth="7" markerHeight="7" refX="1.5" refY="1.5" orient="auto">
+                            <circle cx="1.5" cy="1.5" r="1.5" fill="red"></circle>
                         </marker>
                         <filter id="glow">
                             <feGaussianBlur class="blur" result="coloredBlur" stdDeviation="4"></feGaussianBlur>

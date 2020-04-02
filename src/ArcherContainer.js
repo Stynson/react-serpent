@@ -47,7 +47,6 @@ function rectToPoint(rect: ClientRect) {
 }
 
 function computeCoordinatesFromAnchorPosition(anchorPosition: AnchorPositionType, rect: ClientRect) {
-    console.log(rect);
     switch (anchorPosition) {
         case "top":
             return rectToPoint(rect).add(new Point(rect.width / 2, 0));

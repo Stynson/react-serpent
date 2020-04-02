@@ -208,6 +208,9 @@ export class ArcherContainer extends React.Component<Props, State> {
 
             const noCurves = (style && style.noCurves) || this.props.noCurves;
 
+            const markerEnd = (style && style.markerEnd) || this.props.markerEnd;
+            const markerStart = (style && style.markerStart) || this.props.markerStart;
+
             const offset = this.props.offset || 0;
 
             const startingAnchorOrientation = source.anchor;
@@ -236,6 +239,8 @@ export class ArcherContainer extends React.Component<Props, State> {
                     strokeWidth={strokeWidth}
                     strokeDasharray={strokeDasharray}
                     arrowLabel={label}
+                    markerEnd={markerEnd}
+                    markerStart={markerStart}
                     arrowThickness={arrowThickness}
                     noCurves={!!noCurves}
                     offset={offset}
@@ -264,7 +269,7 @@ export class ArcherContainer extends React.Component<Props, State> {
                 <div style={{ ...this.props.style, position: "relative" }} className={this.props.className}>
                     <svg className="serpent-container" style={this.svgContainerStyle()}>
                         <marker id="circle" markerWidth="7" markerHeight="7" refX="1.5" refY="1.5" orient="auto">
-                            <circle cx="1.5" cy="1.5" r="1.5" fill="red"></circle>
+                            <circle cx="1.5" cy="1.5" r="1.5" fill="white"></circle>
                         </marker>
                         <filter id="glow">
                             <feGaussianBlur class="blur" result="coloredBlur" stdDeviation="4"></feGaussianBlur>

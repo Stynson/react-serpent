@@ -136,7 +136,7 @@ export class ArcherContainer extends React.Component<Props, State> {
         const rect = this.getRectFromRef(this.state.refs[index]);
 
         if (!rect) {
-            return new Point(0, 0);
+            return new Point(-1, -1);
         }
         const absolutePosition = computeCoordinatesFromAnchorPosition(position, rect);
 
@@ -192,60 +192,69 @@ export class ArcherContainer extends React.Component<Props, State> {
     computeArrows = (): React$Node => {
         const parentCoordinates = this.getParentCoordinates();
 
-        return this.getSourceToTargets().map(({ source, target, label, style }: SourceToTargetType) => {
-            const strokeColor = (style && style.strokeColor) || this.props.strokeColor;
+        return this.getSourceToTargets()
+            .filter(({ source, target }) => {
+                const startingAnchorOrientation = source.anchor;
+                const startingPoint = this.getPointCoordinatesFromAnchorPosition(source.anchor, source.id, parentCoordinates);
 
-            const arrowLength = (style && style.arrowLength) || this.props.arrowLength;
+                const endingAnchorOrientation = target.anchor;
+                const endingPoint = this.getPointCoordinatesFromAnchorPosition(target.anchor, target.id, parentCoordinates);
+                return !((endingPoint.x === -1 && endingPoint.y === -1) || (startingPoint.x === -1 && startingPoint.y === -1));
+            })
+            .map(({ source, target, label, style }: SourceToTargetType) => {
+                const strokeColor = (style && style.strokeColor) || this.props.strokeColor;
 
-            const strokeWidth = (style && style.strokeWidth) || this.props.strokeWidth;
+                const arrowLength = (style && style.arrowLength) || this.props.arrowLength;
 
-            const transparentStrokeWidth = (style && style.transparentStrokeWidth) || this.props.transparentStrokeWidth;
+                const strokeWidth = (style && style.strokeWidth) || this.props.strokeWidth;
 
-            const strokeDasharray = (style && style.strokeDasharray) || this.props.strokeDasharray;
+                const transparentStrokeWidth = (style && style.transparentStrokeWidth) || this.props.transparentStrokeWidth;
 
-            const arrowThickness = (style && style.arrowThickness) || this.props.arrowThickness;
+                const strokeDasharray = (style && style.strokeDasharray) || this.props.strokeDasharray;
 
-            const noCurves = (style && style.noCurves) || this.props.noCurves;
+                const arrowThickness = (style && style.arrowThickness) || this.props.arrowThickness;
 
-            const markerEnd = (style && style.markerEnd) || this.props.markerEnd;
-            const markerStart = (style && style.markerStart) || this.props.markerStart;
+                const noCurves = (style && style.noCurves) || this.props.noCurves;
 
-            const offset = this.props.offset || 0;
+                const markerEnd = (style && style.markerEnd) || this.props.markerEnd;
+                const markerStart = (style && style.markerStart) || this.props.markerStart;
 
-            const startingAnchorOrientation = source.anchor;
-            const startingPoint = this.getPointCoordinatesFromAnchorPosition(source.anchor, source.id, parentCoordinates);
+                const offset = this.props.offset || 0;
 
-            const endingAnchorOrientation = target.anchor;
-            const endingPoint = this.getPointCoordinatesFromAnchorPosition(target.anchor, target.id, parentCoordinates);
+                const startingAnchorOrientation = source.anchor;
+                const startingPoint = this.getPointCoordinatesFromAnchorPosition(source.anchor, source.id, parentCoordinates);
 
-            let onMouseEnter = () => {};
-            if (this.props.onMouseEnter) onMouseEnter = e => this.props.onMouseEnter(e, source.id, target.id);
-            let onMouseLeave = () => {};
-            if (this.props.onMouseLeave) onMouseLeave = e => this.props.onMouseLeave(e, source.id, target.id);
+                const endingAnchorOrientation = target.anchor;
+                const endingPoint = this.getPointCoordinatesFromAnchorPosition(target.anchor, target.id, parentCoordinates);
 
-            return (
-                <SvgArrow
-                    key={JSON.stringify({ source, target })}
-                    startingPoint={startingPoint}
-                    startingAnchorOrientation={startingAnchorOrientation}
-                    endingPoint={endingPoint}
-                    endingAnchorOrientation={endingAnchorOrientation}
-                    strokeColor={strokeColor}
-                    arrowLength={arrowLength}
-                    onMouseEnter={onMouseEnter}
-                    onMouseLeave={onMouseLeave}
-                    transparentStrokeWidth={transparentStrokeWidth}
-                    strokeWidth={strokeWidth}
-                    strokeDasharray={strokeDasharray}
-                    arrowLabel={label}
-                    markerEnd={markerEnd}
-                    markerStart={markerStart}
-                    arrowThickness={arrowThickness}
-                    noCurves={!!noCurves}
-                    offset={offset}
-                />
-            );
-        });
+                let onMouseEnter = () => {};
+                if (this.props.onMouseEnter) onMouseEnter = e => this.props.onMouseEnter(e, source.id, target.id);
+                let onMouseLeave = () => {};
+                if (this.props.onMouseLeave) onMouseLeave = e => this.props.onMouseLeave(e, source.id, target.id);
+
+                return (
+                    <SvgArrow
+                        key={JSON.stringify({ source, target })}
+                        startingPoint={startingPoint}
+                        startingAnchorOrientation={startingAnchorOrientation}
+                        endingPoint={endingPoint}
+                        endingAnchorOrientation={endingAnchorOrientation}
+                        strokeColor={strokeColor}
+                        arrowLength={arrowLength}
+                        onMouseEnter={onMouseEnter}
+                        onMouseLeave={onMouseLeave}
+                        transparentStrokeWidth={transparentStrokeWidth}
+                        strokeWidth={strokeWidth}
+                        strokeDasharray={strokeDasharray}
+                        arrowLabel={label}
+                        markerEnd={markerEnd}
+                        markerStart={markerStart}
+                        arrowThickness={arrowThickness}
+                        noCurves={!!noCurves}
+                        offset={offset}
+                    />
+                );
+            });
     };
 
     svgContainerStyle = () => ({

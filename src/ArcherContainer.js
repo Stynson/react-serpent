@@ -194,10 +194,7 @@ export class ArcherContainer extends React.Component<Props, State> {
 
         return this.getSourceToTargets()
             .filter(({ source, target }) => {
-                const startingAnchorOrientation = source.anchor;
                 const startingPoint = this.getPointCoordinatesFromAnchorPosition(source.anchor, source.id, parentCoordinates);
-
-                const endingAnchorOrientation = target.anchor;
                 const endingPoint = this.getPointCoordinatesFromAnchorPosition(target.anchor, target.id, parentCoordinates);
                 return !((endingPoint.x === -1 && endingPoint.y === -1) || (startingPoint.x === -1 && startingPoint.y === -1));
             })
